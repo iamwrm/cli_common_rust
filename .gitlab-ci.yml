@@ -1,0 +1,18 @@
+stages:          
+  - build
+
+build_rust_latest_centos7:       
+  image: centos:7
+  stage: build
+  timeout: 30 minutes
+  tags:
+    - gfw_free
+  script:
+    - cat /etc/*release
+    - yum install -y curl gcc make git openssh
+    - yum install -y openssl-devel # for rust
+    - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    - source $HOME/.cargo/env
+    - rustup target add x86_64-unknown-linux-musl
+    - cargo build --release --target x86_64-unknown-linux-musl
+
