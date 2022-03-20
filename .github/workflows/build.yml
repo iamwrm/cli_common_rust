@@ -1,5 +1,7 @@
 name: build_image
 
+on: push
+
 env:
   DEBIAN_FRONTEND: noninteractive
 
