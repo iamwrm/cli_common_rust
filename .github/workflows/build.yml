@@ -1,0 +1,18 @@
+name: build_image
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    container: rust:latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build
+        run: |
+          cd cli_common
+          cargo b
+
